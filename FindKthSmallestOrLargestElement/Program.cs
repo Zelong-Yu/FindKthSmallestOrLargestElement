@@ -10,13 +10,31 @@ namespace FindKthSmallestOrLargestElement
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Find 2nd largest in  [3,2,1,5,6,4]");
+            Console.WriteLine(FindKthLargest(new int[] { 3, 2, 1, 5, 6, 4 }, 2));
+            Console.WriteLine("Find 2nd smallest in [3,2,1,5,6,4]");
+            Console.WriteLine(FindKthSmallest(new int[] { 3, 2, 1, 5, 6, 4 }, 2));
+            Console.WriteLine("Find 4th largest in  [3,2,3,1,2,4,5,5,6]");
+            Console.WriteLine(FindKthLargest(new int[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4));
+            Console.WriteLine("Find 4th smallest in [3,2,3,1,2,4,5,5,6]");
+            Console.WriteLine(FindKthSmallest(new int[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4));
+            Console.WriteLine("Find 5th smallest in [3,2,3,1,2,4,5,5,6]");
+            Console.WriteLine(FindKthSmallest(new int[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 5));
+            Console.WriteLine("Find 6th smallest in [3,2,3,1,2,4,5,5,6]");
+            Console.WriteLine(FindKthSmallest(new int[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 6));
         }
-        public int FindKthLargest(int[] nums, int k)
+        public static int FindKthLargest(int[] nums, int k)
         {
             //return (N-k)th index smallest, which is the kth largest element
             return QuickSelect(nums, 0, nums.Length - 1, nums.Length - k);
         }
-        public int QuickSelect(int[] nums, int left, int right, int k)
+
+        public static int FindKthSmallest(int[] nums, int k)
+        {
+            //return (k-1)th index smallest (counting from 0), which is the kth smallest element
+            return QuickSelect(nums, 0, nums.Length - 1, k-1);
+        }
+        public static int QuickSelect(int[] nums, int left, int right, int k)
         {
             int pivotIndex = partition(nums, left, right);
             //when k is pivotIndex, num[pivotIndex] has k-1 elements smaller than it
@@ -28,14 +46,14 @@ namespace FindKthSmallestOrLargestElement
         }
 
 
-        public void Swap(ref int A, ref int B)
+        public static void Swap(ref int A, ref int B)
         {
             int temp = A;
             A = B;
             B = temp;
         }
 
-        private int partition(int[] arr, int left, int right)
+        private static int partition(int[] arr, int left, int right)
         {
             //randomly choose a pivot
             int pivotIndex = new Random().Next(left, right);
